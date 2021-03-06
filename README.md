@@ -38,3 +38,19 @@ https://github.com/dwyl/learn-to-send-email-via-google-script-html-no-server
         - your lost item {name} has been found
         - the message from the finder is as follows
         - {message}
+
+### Todo
+- [ ] github
+    - [ ] create github account
+    - [ ] add as collaborator
+- [ ] create site
+    - [ ] html
+    - [ ] js for form submit
+    - [ ] js for user registeration
+    - [ ] js for QR printing
+- [ ] firebase
+    - [ ] create user database
+    - [ ] merge site to firebase
+- [ ] GAS
+    - [ ] create spreadsheet
+    - [ ] create API function for mailApp
