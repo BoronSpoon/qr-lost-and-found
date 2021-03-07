@@ -44,13 +44,31 @@ https://github.com/dwyl/learn-to-send-email-via-google-script-html-no-server
     - [ ] create github account
     - [ ] add as collaborator
 - [ ] create site
-    - [ ] html
-    - [ ] js for form submit
-    - [ ] js for user registeration
-    - [ ] js for QR printing
+    - [ ] html for user registeration
+    - [ ] html for item registeration and QR printing
+    - [ ] html for item found
 - [ ] firebase
     - [ ] create user database
     - [ ] merge site to firebase
 - [ ] GAS
     - [ ] create spreadsheet
     - [ ] create API function for mailApp
+
+## implementation details
+> maybe you can do this part relatively easily
+## form submit
+The input data should be stored in an object.
+[reference](https://github.com/dwyl/learn-to-send-email-via-google-script-html-no-server#7-create-your-basic-html-form)
+#### 1. registeration
+- ~~authentication is done by Firebase's internal function~~
+- form inputs
+    - email address (for notification)
+#### 2. item registeration
+- form inputs
+    - item name
+- ~~generate QR code for URL of item~~
+#### 3. item found
+- form inputs
+    - found location
+    - current location of item
+    - message to owner
