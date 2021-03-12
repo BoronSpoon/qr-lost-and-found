@@ -40,35 +40,61 @@ https://github.com/dwyl/learn-to-send-email-via-google-script-html-no-server
         - {message}
 
 ### Todo
-- [ ] github
-    - [ ] create github account
-    - [ ] add as collaborator
 - [ ] create site
     - [ ] html for user registeration
     - [ ] html for item registeration and QR printing
     - [ ] html for item found
 - [ ] firebase
-    - [ ] create user database
+    - [x] setting user auth
+    - [x] create user database
     - [ ] merge site to firebase
 - [ ] GAS
     - [ ] create spreadsheet
     - [ ] create API function for mailApp
 
 ## implementation details
-> maybe you can do this part relatively easily
 ## form submit
 The input data should be stored in an object.
 [reference](https://github.com/dwyl/learn-to-send-email-via-google-script-html-no-server#7-create-your-basic-html-form)
 #### 1. registeration
-- ~~authentication is done by Firebase's internal function~~
+- authentication is done by Firebase's internal function
 - form inputs
     - email address (for notification)
 #### 2. item registeration
 - form inputs
     - item name
-- ~~generate QR code for URL of item~~
+- generate QR code for URL of item
 #### 3. item found
 - form inputs
     - found location
     - current location of item
     - message to owner
+## database
+### structure
+1. must be shallow
+2. query is fast
+3. create snippets
+- users:
+    - one:
+        - name: arch
+        - email: arch_gmail.com
+        - preferences: 
+            - notify-at-link-open: true
+            - notify-if-item-is-not-lost: true
+            - where-to-notify: email
+        - items: 
+            - one:
+                - name: watch
+                - lost: true
+                - found-location: bus station
+                - current-location: police station
+                - messages:
+                    - one: 
+                        - sender: finder
+                        - text: hey i found this watch
+                        - timestamp: 92839321
+                    - two: 
+                        - sender: owner
+                        - location: null
+                        - text: please give it to the police
+                        - timestamp: 92839928
