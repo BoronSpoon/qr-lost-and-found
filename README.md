@@ -70,31 +70,62 @@ The input data should be stored in an object.
     - current location of item
     - message to owner
 ## database
+### use case
+#### 1. user registeration
+- create a entry in users
+#### 2. item registeration
+- create a entry in items
+#### 3. item found
+- get entry of user
+    - email
+    - perferences
+- get entry of item
+    - lost
+- update entry of item
+    - found location
+    - current location
+    - message
+#### 4. reviewing messages
+- get entry of user
+    - message
+#### 5. reviewing items
+- get entry of user
+    - items
+#### 6. reviewing preferences
+- get entries of user
+    - name
+    - email
+    - preferences
 ### structure
+#### rules
 1. must be shallow
 2. query is fast
 3. create snippets
+#### structure
 - users:
-    - one:
+    - userId1:
         - name: arch
         - email: arch_gmail.com
         - preferences: 
-            - notify-at-link-open: true
-            - notify-if-item-is-not-lost: true
-            - where-to-notify: email
-        - items: 
-            - one:
-                - name: watch
-                - lost: true
-                - found-location: bus station
-                - current-location: police station
-                - messages:
-                    - one: 
-                        - sender: finder
-                        - text: hey i found this watch
-                        - timestamp: 92839321
-                    - two: 
-                        - sender: owner
-                        - location: null
-                        - text: please give it to the police
-                        - timestamp: 92839928
+            - notifyAtLinkOpen: true
+            - notifyNotLostItem: true
+            - whereToNotify: email
+- items: 
+    - userId1:
+        - itemId1:
+            - name: watch
+            - lost: true
+            - foundLocation: bus station
+            - currentLocation: police station
+- messages:
+    - userId1:
+        - messageId1: 
+            - item: itemId1
+            - sender: finder
+            - text: Hey I found this watch
+            - timestamp: 92839321
+        - messageId2: 
+            - item: itemId1
+            - sender: owner
+            - text: Please give it to the police
+            - timestamp: 92839928
