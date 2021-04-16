@@ -1,52 +1,49 @@
 <template>
   <v-app>
-    <v-app-bar app color="primary" dark>
-      <div class="d-flex align-center">
-        <v-img
-          alt="Vuetify Logo"
-          class="shrink mr-2"
-          contain
-          src="https://cdn.vuetifyjs.com/images/logos/vuetify-logo-dark.png"
-          transition="scale-transition"
-          width="40"
-        />
-
-        <v-img
-          alt="Vuetify Name"
-          class="shrink mt-1 hidden-sm-and-down"
-          contain
-          min-width="100"
-          src="https://cdn.vuetifyjs.com/images/logos/vuetify-name-dark.png"
-          width="100"
-        />
-      </div>
-
-      <v-spacer></v-spacer>
-
-      <v-btn
-        href="https://github.com/vuetifyjs/vuetify/releases/latest"
-        target="_blank"
-        text
-      >
-        <span class="mr-2">Latest Release</span>
-        <v-icon>mdi-open-in-new</v-icon>
-      </v-btn>
-    </v-app-bar>
-
     <v-main>
-      <HelloWorld />
+      <Authentication />
     </v-main>
   </v-app>
 </template>
 
 <script>
-import HelloWorld from "./components/HelloWorld";
+//import HelloWorld from "./components/HelloWorld";
+import Authentication from "./views/Authentication";
 
 export default {
   name: "App",
 
   components: {
-    HelloWorld,
+    Authentication,
+  },
+  mounted () {
+    // FirebaseUI config.
+    var uiConfig = {
+      signInOptions: [
+        // Leave the lines as is for the providers you want to offer your users.
+        //firebase.auth.GoogleAuthProvider.PROVIDER_ID,
+        firebase.auth.EmailAuthProvider.PROVIDER_ID,
+      ],    
+      callbacks: {
+        signInSuccessWithAuthResult: (authResult, redirectUrl) => {
+          var userId = authResult.user.uid;
+          if (authResult.additionalUserInfo.isNewUser){ // if new user, register to database
+            userRegisteration(authResult.user.displayName, authResult.user.email)
+          }
+          document.getElementById('userAuthentication').style.display = 'none';
+          //document.getElementById('mainMenu').style.display = 'block';
+          return false;
+        },
+        uiShown: () => {
+          document.getElementById('loader').style.display = 'none';
+        },
+      },
+    };
+      
+    // Initialize the FirebaseUI Widget using Firebase.
+    var ui = new firebaseui.auth.AuthUI(firebase.auth());
+    // The start method will wait until the DOM is loaded.
+    ui.start('#firebaseui-auth-container', uiConfig);
   },
 
   data: () => ({
