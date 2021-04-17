@@ -9,24 +9,25 @@
       scroll-target="#scrolling-techniques-6"
     >
       <v-app-bar-nav-icon></v-app-bar-nav-icon>
-
-      <v-toolbar-title>Collapsing Bar</v-toolbar-title>
-
+      <v-toolbar-title>User Preferences</v-toolbar-title>
       <v-spacer></v-spacer>
-
-      <v-checkbox
-        v-model="collapseOnScroll"
-        color="white"
-        hide-details
-      ></v-checkbox>
     </v-app-bar>
-    <v-sheet
-      id="scrolling-techniques-6"
-      class="overflow-y-auto"
-      max-height="600"
-    >
-      <v-container style="height: 1000px;"></v-container>
-    </v-sheet>
+    <v-container>
+      <v-list-item-group
+        v-model="selectedItem"
+        color="primary"
+      >
+        <v-list-item
+          v-for="(preference, i) in preferences"
+          :key="i"
+        >
+          <v-checkbox
+            v-model="preference.value"
+            :label="preference.text"
+          ></v-checkbox>
+        </v-list-item>
+      </v-list-item-group>
+    </v-container>
   </v-card>
 </template>
 
@@ -35,6 +36,11 @@ export default {
   name: "UserPreferences",
   data: () => ({
     collapseOnScroll: true,
+    preferences: [
+      { text: 'Notify when link is accessed', value: ''},
+      { text: 'Notification for items that are not lost', value: ''},
+      { text: 'Where to notify', value: ''},
+    ],
   }),
   components: {
     //
