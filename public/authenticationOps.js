@@ -13,7 +13,7 @@ function loginScreen (){
                     addUser(userId, authResult.user.displayName, authResult.user.email)
                 }
                 document.getElementById('userAuthentication').style.display = 'none';
-                //document.getElementById('mainMenu').style.display = 'block';
+                this.$router.push("/MainMenu"); // TBD: router does not work
                 return false;
             },
             uiShown: () => {
