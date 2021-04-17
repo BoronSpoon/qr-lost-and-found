@@ -2,7 +2,7 @@
   <div>  
     <v-card
       class="mx-auto"
-      max-width="300"
+      max-width="600"
       tile
     >
       <v-list>
@@ -14,12 +14,13 @@
           <v-list-item
             v-for="(item, i) in items"
             :key="i"
+            :to="item.link"
           >
             <v-list-item-icon>
               <v-icon v-text="item.icon"></v-icon>
             </v-list-item-icon>
-            <v-list-item-content>
-              <v-list-item-title v-text="item.text"></v-list-item-title>
+              <v-list-item-content>
+            <v-list-item-title v-text="item.text"></v-list-item-title>
             </v-list-item-content>
           </v-list-item>
         </v-list-item-group>
@@ -37,9 +38,9 @@ export default {
   data: () => ({
     selectedItem: 1,
     items: [
-      { text: 'Preferences', icon: 'mdi-account-cog' },
-      { text: 'Item Registeration', icon: 'mdi-tag-plus' },
-      { text: 'Item List', icon: 'mdi-tag-multiple' },
+      { text: 'Preferences', icon: 'mdi-account-cog', link: '/userPreferences'},
+      { text: 'Item Registeration', icon: 'mdi-tag-plus' , link: '/itemRegisteration'},
+      { text: 'Item List', icon: 'mdi-tag-multiple', link: '/itemList'},
     ],
   }),
 };
