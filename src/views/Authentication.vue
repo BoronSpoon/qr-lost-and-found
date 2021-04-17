@@ -13,6 +13,7 @@ export default {
     this.loginScreen();
   },
   methods: {
+    // I wanted to include this in a javascript file, but vue router cannot be called outside /src
     loginScreen: function (){
       // FirebaseUI config.
       var uiConfig = {
