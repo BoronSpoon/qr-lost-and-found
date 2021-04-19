@@ -23,7 +23,12 @@
               :label="preference.text"
             ></v-select>
           </v-list-item>
-        </v-list-item-group>
+        </v-list-item-group> 
+        <v-btn
+          color="error"
+          class="mr-4"
+          @click="formSubmit"
+        >
       </v-sheet>
     </v-card>
   </div>
@@ -45,5 +50,16 @@ export default {
   components: {
     Header
   },
+  methods: {
+    formSubmit() {
+      var values = {
+        'notifyAtLinkOpen': this.preferences[0].value,
+        'notifyNotLostItem': this.preferences[1].value,
+        'whereToNotify': this.preferences[2].value
+      };
+      console.log(values);
+      userPreferences.set(values);
+    }
+  }
 };
 </script>
