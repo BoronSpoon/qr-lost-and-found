@@ -57,7 +57,6 @@ export default {
         'notifyNotLostItem': this.preferences[1].value,
         'whereToNotify': this.preferences[2].value
       };
-      console.log(values);
       userPreferences.set(values);
     }
   }
