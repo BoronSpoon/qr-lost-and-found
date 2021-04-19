@@ -13,20 +13,20 @@ const routes = [
     name: "MainMenu",
     meta: { requiresAuth: true },
     component: () =>
-      import("../views/MainMenu.vue"),
+      import("@/views/MainMenu.vue"),
   },
   {
     path: "/userPreferences",
     name: "UserPreferences",
     meta: { requiresAuth: true },
     component: () =>
-      import("../views/UserPreferences.vue"),
+      import("@/views/UserPreferences.vue"),
   },
   {
     path: "/",
     name: "Authentication",
     component: () =>
-      import("../views/Authentication.vue"),
+      import("@/views/Authentication.vue"),
   },
 ];
 
