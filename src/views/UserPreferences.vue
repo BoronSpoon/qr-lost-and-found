@@ -17,9 +17,16 @@
           :key="i"
         >
           <v-checkbox
+            v-if="preference.type == 'checkbox'"
             v-model="preference.value"
             :label="preference.text"
           ></v-checkbox>
+          <v-select
+            v-if="preference.type == 'select'"
+            v-model="preference.value"
+            :items="preference.values"
+            :label="preference.text"
+          ></v-select>
         </v-list-item>
       </v-list-item-group>
     </v-sheet>
@@ -32,9 +39,9 @@ export default {
   data: () => ({
     collapseOnScroll: true,
     preferences: [
-      { text: 'Notify when link is accessed', value: ''},
-      { text: 'Notification for items that are not lost', value: ''},
-      { text: 'Where to notify', value: ''},
+      { text: 'Notify when link is accessed', value: false, type: 'checkbox'},
+      { text: 'Notification for items that are not lost', value: true, type: 'checkbox'},
+      { text: 'Where to notify', values: ['email', 'app'], value: 'email', type: 'select'},
     ],
   }),
   components: {
