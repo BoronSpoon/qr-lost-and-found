@@ -1,18 +1,13 @@
 <template>
   <v-card class="overflow-hidden">
-    <v-app-bar
-      :collapse="!collapseOnScroll"
-      :collapse-on-scroll="collapseOnScroll"
-      absolute
+    <v-toolbar
       color="deep-purple accent-4"
       dark
-      scroll-target="#scrolling-techniques-6"
     >
       <v-app-bar-nav-icon></v-app-bar-nav-icon>
       <v-toolbar-title>User Preferences</v-toolbar-title>
-      <v-spacer></v-spacer>
-    </v-app-bar>
-    <v-container>
+    </v-toolbar>
+    <v-sheet>
       <v-list-item-group
         v-model="selectedItem"
         color="primary"
@@ -27,7 +22,7 @@
           ></v-checkbox>
         </v-list-item>
       </v-list-item-group>
-    </v-container>
+    </v-sheet>
   </v-card>
 </template>
 
