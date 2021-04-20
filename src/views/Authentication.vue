@@ -7,6 +7,9 @@
 </template>
 
 <script>
+import Vue from 'vue'
+import DatabaseOps from '@/mixins/DatabaseOps'
+
 export default {
   name: "Authentication",
   mounted () {
@@ -24,9 +27,9 @@ export default {
         ],    
         callbacks: {
           signInSuccessWithAuthResult: (authResult, redirectUrl) => {
-            var userId = authResult.user.uid;
+            Vue.prototype.$userId = authResult.user.uid;
             if (authResult.additionalUserInfo.isNewUser){ // if new user, register to database
-              addUser(userId, authResult.user.displayName, authResult.user.email)
+              this.addUser(authResult.user.displayName, authResult.user.email)
             }
             document.getElementById('userAuthentication').style.display = 'none';
             this.$router.push("/MainMenu"); // TBD: router does not work
@@ -41,10 +44,19 @@ export default {
       var ui = new firebaseui.auth.AuthUI(firebase.auth());
       // The start method will wait until the DOM is loaded.
       ui.start('#firebaseui-auth-container', uiConfig);
-    }
+    },    
+    addUser(userName, email){
+        var data = {
+            'email': email,
+            'name': userName
+        };
+        this.addUserCredentials(data);
+        this.initUserPreferences();
+    },
   },
   data: () => ({
     //
   }),
+  mixins: [DatabaseOps]
 };
 </script>

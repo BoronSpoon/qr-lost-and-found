@@ -36,6 +36,7 @@
 
 <script>
 import Header from '@/components/Header'
+import DatabaseOps from '@/mixins/DatabaseOps'
 
 export default {
   name: "UserPreferences",
@@ -57,8 +58,9 @@ export default {
         'notifyNotLostItem': this.preferences[1].value,
         'whereToNotify': this.preferences[2].value
       };
-      userPreferences.set(values);
+      this.setUserPreferences(values);
     }
-  }
+  },
+  mixins: [DatabaseOps]
 };
 </script>
