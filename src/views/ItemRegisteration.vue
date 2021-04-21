@@ -67,7 +67,7 @@ export default {
         'name': itemName
       }
       var itemId = this.pushItems(item);
-      setItemIds(itemId);
+      this.setItemIds(itemId);
       var qrcodeUrl = 'http://127.0.0.1:5000/?foundItemId='+itemId;
       $('#qrcodeImage').empty(); // delete the previous QR code images
       var qrcodeImageElementId = 'qrcodeImage';
