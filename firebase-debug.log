@@ -1,0 +1,18 @@
+[debug] [2021-04-21T07:10:05.682Z] ----------------------------------------------------------------------
+[debug] [2021-04-21T07:10:05.687Z] Command:       /usr/local/bin/firebase /home/ray/.cache/firebase/tools/lib/node_modules/firebase-tools/lib/bin/firebase emulators:start
+[debug] [2021-04-21T07:10:05.687Z] CLI Version:   9.6.1
+[debug] [2021-04-21T07:10:05.687Z] Platform:      linux
+[debug] [2021-04-21T07:10:05.688Z] Node Version:  v12.18.1
+[debug] [2021-04-21T07:10:05.718Z] Time:          Wed Apr 21 2021 16:10:05 GMT+0900 (Japan Standard Time)
+[debug] [2021-04-21T07:10:05.718Z] ----------------------------------------------------------------------
+[debug] [2021-04-21T07:10:05.718Z] 
+[debug] [2021-04-21T07:10:05.782Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2021-04-21T07:10:05.783Z] > authorizing via signed-in user
+[info] i  emulators: Starting emulators: auth, functions, database, hosting {"metadata":{"emulator":{"name":"hub"},"message":"Starting emulators: auth, functions, database, hosting"}}
+[warn] ⚠  emulators: It seems that you are running multiple instances of the emulator suite for project qr-lost-and-found. This may result in unexpected behavior. 
+[debug] [2021-04-21T07:10:05.823Z] [hub] writing locator at /tmp/hub-qr-lost-and-found.json
+[warn] ⚠  functions: The following emulators are not running, calls to these services from the Functions emulator will affect production: firestore, pubsub {"metadata":{"emulator":{"name":"functions"},"message":"The following emulators are not running, calls to these services from the Functions emulator will affect production: \u001b[1mfirestore, pubsub\u001b[22m"}}
+[info] ✔  functions: Using node@12 from host. {"metadata":{"emulator":{"name":"functions"},"message":"Using node@12 from host."}}
+[debug] [2021-04-21T07:10:05.960Z] defaultcredentials: writing to file /home/ray/.config/firebase/systemd_alert_gmail.com_application_default_credentials.json
+[debug] [2021-04-21T07:10:05.979Z] Setting GAC to /home/ray/.config/firebase/systemd_alert_gmail.com_application_default_credentials.json {"metadata":{"emulator":{"name":"functions"},"message":"Setting GAC to /home/ray/.config/firebase/systemd_alert_gmail.com_application_default_credentials.json"}}
+[debug] [2021-04-21T07:10:05.985Z] >>> [apiv2][query] GET https://firebase.googleapis.com/v1beta1/projects/qr-lost-and-found/adminSdkConfig [none]

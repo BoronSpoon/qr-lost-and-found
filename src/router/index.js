@@ -23,6 +23,13 @@ const routes = [
       import("@/views/UserPreferences.vue"),
   },
   {
+    path: "/itemRegisteration",
+    name: "ItemRegisteration",
+    meta: { requiresAuth: true },
+    component: () =>
+      import("@/views/ItemRegisteration.vue"),
+  },
+  {
     path: "/",
     name: "Authentication",
     component: () =>

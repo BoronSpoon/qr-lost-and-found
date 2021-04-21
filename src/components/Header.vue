@@ -2,7 +2,6 @@
   <div>
     <v-card
       class="mx-auto"
-      max-width="600"
       tile
     >
       <v-toolbar

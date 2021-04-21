@@ -2,29 +2,35 @@
   <div>
     <Header :title="title"/>
     <v-card class="overflow-hidden">
-      <v-list-item-group
-        v-model="selectedItem"
-        color="primary"
-      >
-        <v-list-item
-          v-for="(preference, i) in preferences"
-          :key="i"
+      <v-sheet>
+        <v-list-item-group
+          v-model="selectedItem"
+          color="primary"
         >
-          <v-checkbox
-            v-if="preference.type == 'checkbox'"
-            v-model="preference.value"
-            :label="preference.text"
-            @change="formSubmit"
-          ></v-checkbox>
-          <v-select
-            v-if="preference.type == 'select'"
-            v-model="preference.value"
-            :items="preference.values"
-            :label="preference.text"
-            @change="formSubmit"
-          ></v-select>
-        </v-list-item>
-      </v-list-item-group> 
+          <v-list-item
+            v-for="(preference, i) in preferences"
+            :key="i"
+          >
+            <v-checkbox
+              v-if="preference.type == 'checkbox'"
+              v-model="preference.value"
+              :label="preference.text"
+            ></v-checkbox>
+            <v-select
+              v-if="preference.type == 'select'"
+              v-model="preference.value"
+              :items="preference.values"
+              :label="preference.text"
+            ></v-select>
+          </v-list-item>
+        </v-list-item-group> 
+        <v-btn
+          class="mr-4"
+          @click="formSubmit"
+        >
+          Submit
+        </v-btn>
+      </v-sheet>
     </v-card>
   </div>
 </template>
@@ -47,7 +53,7 @@ export default {
     Header
   },
   methods: {
-    formSubmit(e) {
+    formSubmit() {
       var values = {
         'notifyAtLinkOpen': this.preferences[0].value,
         'notifyNotLostItem': this.preferences[1].value,
