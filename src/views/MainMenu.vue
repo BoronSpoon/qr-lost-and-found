@@ -1,6 +1,6 @@
 <template>
   <div>
-    <Header :title="headerTitle"/>
+    <Header :title="title"/>
   </div>
 </template>
 
@@ -13,7 +13,7 @@ export default {
     Header
   },
   data: () => ({
-    headerTitle: "Main Menu"
+    title: 'Main Menu'
   }),
 };
 </script>

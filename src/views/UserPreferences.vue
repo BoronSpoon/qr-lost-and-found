@@ -1,6 +1,6 @@
 <template>
   <div>
-    <Header :title="headerTitle"/>
+    <Header :title="title"/>
     <v-card class="overflow-hidden">
       <v-sheet>
         <v-list-item-group
@@ -41,12 +41,12 @@ import DatabaseOps from '@/mixins/DatabaseOps'
 export default {
   name: "UserPreferences",
   data: () => ({
-    headerTitle: 'User Preferences',
     preferences: [
       { text: 'Notify when link is accessed', value: false, type: 'checkbox'},
       { text: 'Notification for items that are not lost', value: true, type: 'checkbox'},
       { text: 'Where to notify', values: ['email', 'app'], value: 'email', type: 'select'},
     ],
+    title: 'User Preferences'
   }),
   components: {
     Header

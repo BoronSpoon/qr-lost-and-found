@@ -1,8 +1,10 @@
 <template>
   <v-navigation-drawer
-      v-model="show"
-      absolute
-      temporary
+    v-model="show"
+    color="deep-purple accent-4"
+    dark
+    absolute
+    temporary
   >
     <v-list>
       <v-list-item-group
@@ -33,7 +35,10 @@ export default {
     //
   },
   props: {
-    show: false,
+    show: {
+      type: Boolean,
+      default: false
+    }
   },
   data: () => ({
     selectedItem: 1,
@@ -43,5 +48,10 @@ export default {
       { text: 'Item List', icon: 'mdi-tag-multiple', link: '/itemList'},
     ]
   }),
+  watch: {
+    show() {
+      this.$emit('update:show', this.show);
+    }
+  },
 };
 </script>

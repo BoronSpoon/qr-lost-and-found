@@ -9,11 +9,11 @@
         color="deep-purple accent-4"
         dark
       >
-        <v-app-bar-nav-icon @click="showDrawer = true"></v-app-bar-nav-icon>
+        <v-app-bar-nav-icon @click.stop="show = !show"></v-app-bar-nav-icon>
         <v-toolbar-title>{{title}}</v-toolbar-title>
       </v-toolbar>
     </v-card>
-    <Drawer :show="showDrawer"/>
+    <Drawer :show="show" v-on:update:show="show = $event"/>
   </div>
 </template>
 
@@ -25,11 +25,11 @@ export default {
   components: {
     Drawer
   },
+  data: () => ({
+    show: false
+  }),
   props: {
     title: String,
   },
-  data: () => ({
-    showDrawer: false
-  }),
 };
 </script>

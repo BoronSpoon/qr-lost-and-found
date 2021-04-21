@@ -32,7 +32,7 @@ export default {
               this.addUser(authResult.user.displayName, authResult.user.email)
             }
             document.getElementById('userAuthentication').style.display = 'none';
-            this.$router.push("/MainMenu"); // TBD: router does not work
+            this.$router.push("/MainMenu");
             return false;
           },
           uiShown: () => {
