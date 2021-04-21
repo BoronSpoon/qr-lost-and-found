@@ -4,10 +4,7 @@
       class="mx-auto"
       tile
     >
-      <v-toolbar
-        color="deep-purple accent-4"
-        dark
-      >
+      <v-toolbar>
         <v-app-bar-nav-icon @click.stop="show = !show"></v-app-bar-nav-icon>
         <v-toolbar-title>{{title}}</v-toolbar-title>
       </v-toolbar>

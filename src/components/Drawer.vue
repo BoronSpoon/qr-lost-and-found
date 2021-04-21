@@ -1,8 +1,6 @@
 <template>
   <v-navigation-drawer
     v-model="show"
-    color="deep-purple accent-4"
-    dark
     absolute
     temporary
   >

@@ -29,13 +29,17 @@
             ></v-select>
           </v-list-item>
         </v-list-item-group> 
-        <v-btn
-          class="mr-4"
-          @click="createQR"
-        >
-          Submit
-        </v-btn>
-        <div id="qrcodeImage"></div>
+        <v-list-item>
+          <v-btn
+            class="mr-4"
+            @click="createQR"
+          >
+            Submit
+          </v-btn>         
+        </v-list-item>
+        <v-list-item>     
+          <div id="qrcodeImage"></div>
+        </v-list-item>
       </v-sheet>
     </v-card>
     <div id="qrcodeDiv" class="container" style="margin: 0px; display: none;">
