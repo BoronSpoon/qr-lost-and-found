@@ -47,7 +47,7 @@ export default {
     Header
   },
   methods: {
-    formSubmit(e) {
+    formSubmit() {
       var values = {
         'notifyAtLinkOpen': this.preferences[0].value,
         'notifyNotLostItem': this.preferences[1].value,
