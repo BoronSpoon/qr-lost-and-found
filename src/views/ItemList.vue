@@ -66,8 +66,13 @@ export default {
   components: {
     Header
   },
-  methods: {
-    //
+  watch: {
+    currentPage(){
+      this.shownItem = {
+        start: (this.currentPage-1)*this.itemsPerPage, // start item no for current page
+        end: Math.min((this.currentPage)*this.itemsPerPage, this.items.length) // end item no for current page
+      };
+    }
   },
   mounted() {
     this.totalPages = Math.ceil(this.items.length / this.itemsPerPage);
