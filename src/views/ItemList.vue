@@ -1,7 +1,11 @@
 <template>
   <div>
     <Header :title="title"/>
-    <v-card class="overflow-hidden">
+    <v-progress-circular
+      indeterminate
+      v-if="!dataReady"
+    ></v-progress-circular>
+    <v-card class="overflow-hidden" v-if="dataReady">
       <v-list-item-group
         v-model="selectedItem"
         color="primary"
@@ -37,31 +41,13 @@ import DatabaseOps from '@/mixins/DatabaseOps'
 export default {
   name: "ItemList",
   data: () => ({
-    items: [
-      { text: 'Notify when link is accessed', icon: 'mdi-account-cog'},
-      { text: 'Notification for items that are not lost', icon: 'mdi-account-cog'},
-      { text: 'Where to notify', icon: 'mdi-account-cog'},
-      { text: 'Notify when link is accessed', icon: 'mdi-account-cog'},
-      { text: 'Notification for items that are not lost', icon: 'mdi-account-cog'},
-      { text: 'Where to notify', icon: 'mdi-account-cog'},
-      { text: 'Notify when link is accessed', icon: 'mdi-account-cog'},
-      { text: 'Notification for items that are not lost', icon: 'mdi-account-cog'},
-      { text: 'Where to notify', icon: 'mdi-account-cog'},
-      { text: 'Notify when link is accessed', icon: 'mdi-account-cog'},
-      { text: 'Notification for items that are not lost', icon: 'mdi-account-cog'},
-      { text: 'Where to notify', icon: 'mdi-account-cog'},
-      { text: 'Notify when link is accessed', icon: 'mdi-account-cog'},
-      { text: 'Notification for items that are not lost', icon: 'mdi-account-cog'},
-      { text: 'Where to notify', icon: 'mdi-account-cog'},
-      { text: 'Notify when link is accessed', icon: 'mdi-account-cog'},
-      { text: 'Notification for items that are not lost', icon: 'mdi-account-cog'},
-      { text: 'Where to notify', icon: 'mdi-account-cog'},
-    ],
+    items: [],
     currentPage: 1,
     itemsPerPage: 10,
     totalPages: 0,
     shownItem: {},
-    title: 'Item List'
+    title: 'Item List',
+    dataReady: false,
   }),
   components: {
     Header
@@ -75,11 +61,15 @@ export default {
     }
   },
   mounted() {
-    this.totalPages = Math.ceil(this.items.length / this.itemsPerPage);
-    this.shownItem = {
-      start: (this.currentPage-1)*this.itemsPerPage, // start item no for current page
-      end: Math.min((this.currentPage)*this.itemsPerPage, this.items.length) // end item no for current page
-    };
+    this.getAllItems().then((data) => {
+      this.items = data;
+      this.totalPages = Math.ceil(this.items.length / this.itemsPerPage);
+      this.shownItem = {
+        start: (this.currentPage-1)*this.itemsPerPage, // start item no for current page
+        end: Math.min((this.currentPage)*this.itemsPerPage, this.items.length) // end item no for current page
+      };
+      this.dataReady = true;
+    });
   },
   mixins: [DatabaseOps]
 };
