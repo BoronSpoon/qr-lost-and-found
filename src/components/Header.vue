@@ -9,7 +9,7 @@
         <v-toolbar-title>{{title}}</v-toolbar-title>
       </v-toolbar>
     </v-card>
-    <Drawer :show="show" v-on:update:show="show = $event"/>
+    <Drawer :show.sync="show"/>
   </div>
 </template>
 

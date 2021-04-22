@@ -29,6 +29,7 @@
             ></v-select>
           </v-list-item>
         </v-list-item-group> 
+        <v-spacer/>
         <v-list-item>
           <v-btn
             class="mr-4"
@@ -37,6 +38,7 @@
             Submit
           </v-btn>         
         </v-list-item>
+        <v-spacer/>
         <v-list-item>     
           <div id="qrcodeImage"></div>
         </v-list-item>
@@ -73,12 +75,12 @@ import Header from '@/components/Header'
 import DatabaseOps from '@/mixins/DatabaseOps'
 
 export default {
-  name: "UserPreferences",
+  name: "ItemRegisteration",
   data: () => ({
     preferences: [
       { text: 'Name of Item', value: '', type: 'textField'}
     ],
-    title: 'User Preferences'
+    title: 'ItemRegisteration'
   }),
   components: {
     Header
