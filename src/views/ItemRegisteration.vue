@@ -80,7 +80,7 @@ export default {
     preferences: [
       { text: 'Name of Item', value: '', type: 'textField'}
     ],
-    title: 'ItemRegisteration'
+    title: 'Item Registeration'
   }),
   components: {
     Header

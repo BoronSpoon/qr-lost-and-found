@@ -29,7 +29,7 @@ export default {
       { text: 'Notification for items that are not lost', value: true, type: 'checkbox'},
       { text: 'Where to notify', values: ['email', 'app'], value: 'email', type: 'select'},
     ],
-    title: 'ItemList'
+    title: 'Item List'
   }),
   components: {
     Header
