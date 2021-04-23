@@ -14,12 +14,33 @@
           v-for="(item, i) in items.slice(shownItem.start,shownItem.end)"
           :key="i"
         >
-          <v-list-item-icon>
-            <v-icon v-text="item.icon"></v-icon>
-          </v-list-item-icon>
-
-          <v-list-item-content>
-            <v-list-item-title v-text="item.text"></v-list-item-title>
+          <v-list-item-content class="pa-0">
+            <v-container class="ma-0">
+              <v-row no-gutters>
+                <v-col align="start">
+                  {{item.name}}
+                </v-col>
+                <v-col align="end">
+                  <v-chip
+                    class="mx-1 my-0"
+                    :color="item.lost? 'red': 'grey'"
+                    label
+                    text-color="white"
+                    @click.stop="item.lost = !item.lost"
+                    v-text="item.lost? 'lost': 'not lost'"
+                  >
+                  </v-chip>
+                  <v-chip
+                    class="mx-1 my-0"
+                    :color="item.found? 'red': 'grey'"
+                    label
+                    text-color="white"
+                    v-text="item.found? 'found': 'not found'"
+                  >
+                  </v-chip>
+                </v-col>
+              </v-row>
+            </v-container>
           </v-list-item-content>
         </v-list-item>
       </v-list-item-group> 

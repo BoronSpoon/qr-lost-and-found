@@ -59,6 +59,7 @@
   line-height: 13px;
   font-size: 10px;
   display: block;
+  color: #000000;
 }
 .container {
   background-color: #ffffff;

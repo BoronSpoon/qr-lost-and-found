@@ -49,7 +49,7 @@ export default {
         },
         async getAllItems() {
             return firebase.database().ref('items/'+this.$userId).orderByKey().once('value').then((snapshot) => {
-                data = [];
+                var data = [];
                 snapshot.forEach((childSnapshot) => {
                     var key = childSnapshot.key; // timestamp
                     var childData = childSnapshot.val(); // data for item
