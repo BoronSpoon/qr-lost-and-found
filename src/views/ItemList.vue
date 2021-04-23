@@ -8,7 +8,6 @@
     <v-card class="overflow-hidden" v-if="dataReady">
       <v-list-item-group
         v-model="selectedItem"
-        color="primary"
       >
         <v-list-item
           v-for="(item, i) in items.slice(shownItem.start,shownItem.end)"
@@ -37,6 +36,17 @@
                     text-color="white"
                     v-text="item.found? 'found': 'not found'"
                   >
+                  </v-chip>
+                  <v-chip
+                    class="mx-1 my-0"
+                    :color="item.found? 'red': 'grey'"
+                    label
+                    text-color="white"
+                  >
+                    QR
+                    <v-icon>
+                      mdi-chevron-down
+                    </v-icon>
                   </v-chip>
                 </v-col>
               </v-row>
