@@ -44,12 +44,12 @@
         </v-list-item>
       </v-sheet>
     </v-card>
-    <div id="qrcodeDiv" class="container" style="margin: 0px; display: none;">
-      <span class="qrcodeText" style="font-weight: bold">"QR Lost and Found" [QRコード忘れ物タグ]</span>
+    <div id="qrcodeDiv" class="container">
+      <span class="qrcodeText" style="font-weight: bold">StopLosingStuff(Lost＆Found contact) [忘れ物連絡タグ]</span>
       <span class="qrcodeText">Please contact owner using QR code below</span>
       <span class="qrcodeText">拾った方はQRコードで所有者へ連絡をお願い致します</span>
       <span class="qrcodeText" id="qrcodeItemName"></span>
-      <div id="qrcode" style="margin-top: 4px;"></div>
+      <div id="qrcode"></div>
     </div>
   </div>
 </template>
@@ -68,6 +68,9 @@
   border-color: #000000;
   width: 270px;
   text-align: center;
+  margin: 0px;
+  padding: 0px;
+  display: none;
 }
 </style>
 
