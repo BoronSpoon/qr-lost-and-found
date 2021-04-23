@@ -39,7 +39,7 @@
                   </v-chip>
                   <v-chip
                     class="mx-1 my-0"
-                    :color="item.found? 'red': 'grey'"
+                    color="grey darken-3"
                     label
                     text-color="white"
                   >
