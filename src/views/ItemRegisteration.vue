@@ -40,7 +40,7 @@
         </v-list-item>
         <v-spacer/>
         <v-list-item>     
-          <QR :itemName="preferences[0].value" :clicked.sync="clicked"/>
+          <QR :itemName="preferences[0].value" :clicked.sync="clicked" itemId=""/>
         </v-list-item>
       </v-sheet>
     </v-card>

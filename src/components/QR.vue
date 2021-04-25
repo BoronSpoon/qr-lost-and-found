@@ -51,6 +51,10 @@ export default {
     clicked: {
       type: Boolean,
       default: false
+    },
+    itemId: {
+      type: String,
+      default: ''
     }
   },
   data: () => ({
@@ -58,6 +62,7 @@ export default {
   }),
   watch: {
     clicked() {
+      console.log(this.itemId);
       if (this.clicked == true){
         this.$emit('update:clicked', false);
         if (this.itemName != ''){
@@ -69,19 +74,22 @@ export default {
   mixins: [DatabaseOps],
   methods: {
     drawQR() {
-      var item = {
-        'currentLocation': '',
-        'foundLocation': '',
-        'found': false,
-        'lost': false,
-        'name': this.itemName
+      console.log(this.itemId);
+      if (this.itemId == ''){
+        var item = {
+          'currentLocation': '',
+          'foundLocation': '',
+          'found': false,
+          'lost': false,
+          'name': this.itemName
+        }
+        this.itemId = this.pushItems(item);
+        this.updateItems(this.itemId, {
+          'id': this.itemId
+        });
+        this.setItemIds(this.itemId);
       }
-      var itemId = this.pushItems(item);
-      this.updateItems(itemId, {
-        'id': itemId
-      });
-      this.setItemIds(itemId);
-      var url = 'http://127.0.0.1:5000/?foundItemId='+itemId;
+      var url = 'http://127.0.0.1:5000/?foundItemId='+this.itemId;
       var qrcodeImageElementId = 'qrcodeImage';
       document.getElementById(qrcodeImageElementId).innerHTML = ''; // delete the previous QR code images
       this.generateQrcode(url, this.itemName);
