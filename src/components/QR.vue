@@ -41,6 +41,7 @@
   all:initial;
   background-color: #ffffff;
   width: 256px !important;
+  height: 344px !important;
   padding: 2px !important;
   margin: 0px;
   text-align: center;
@@ -123,7 +124,13 @@ export default {
     divToImage(qrcodeImageElementId) {
       var qrcodeDivElementId = '#qrcodeDiv';
       this.$el.querySelector(qrcodeDivElementId).style.display = 'block'; // show the div for converting to image
-      html2canvas(this.$el.querySelector(qrcodeDivElementId)).then((canvas) => { // convert div(QR code + text) into image
+      html2canvas(this.$el.querySelector(qrcodeDivElementId), {
+        width: 256,
+        height: 344,
+        scrollX: -window.pageXOffset,
+        scrollY: -window.pageYOffset, // compensate for shifting of screenshot
+        useCORS: true
+      }).then((canvas) => { // convert div(QR code + text) into image
         this.$el.querySelector(qrcodeImageElementId).appendChild(canvas);
         this.$el.querySelector(qrcodeDivElementId).style.display = 'none'; // hide the original div
       });
