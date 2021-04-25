@@ -75,7 +75,6 @@ export default {
   }),
   watch: {
     clicked() {
-      console.log(this.itemId);
       if (this.clicked == true){
         this.$emit('update:clicked', false);
         if (this.itemName != ''){
@@ -87,7 +86,6 @@ export default {
   mixins: [DatabaseOps],
   methods: {
     drawQR() {
-      console.log(this.itemId);
       if (this.itemId == ''){
         var item = {
           'currentLocation': '',
@@ -103,17 +101,17 @@ export default {
         this.setItemIds(this.itemId);
       }
       var url = 'http://127.0.0.1:5000/?foundItemId='+this.itemId;
-      var qrcodeImageElementId = 'qrcodeImage';
-      document.getElementById(qrcodeImageElementId).innerHTML = ''; // delete the previous QR code images
+      var qrcodeImageElementId = '#qrcodeImage';
+      this.$el.querySelector(qrcodeImageElementId).innerHTML = ''; // delete the previous QR code images
       this.generateQrcode(url, this.itemName);
       this.divToImage(qrcodeImageElementId);
     },
     generateQrcode(url, qrcodeItemName) {
-      var qrcodeItemNameElementId = 'qrcodeItemName';
-      var qrcodeElementId = 'qrcode';
-      document.getElementById(qrcodeItemNameElementId).innerHTML = 'Item identifier: '+qrcodeItemName;
-      document.getElementById(qrcodeElementId).innerHTML = ''; // reset qr code
-      new QRCode(document.getElementById(qrcodeElementId), {
+      var qrcodeItemNameElementId = '#qrcodeItemName';
+      var qrcodeElementId = '#qrcode';
+      this.$el.querySelector(qrcodeItemNameElementId).innerHTML = 'Item identifier: '+qrcodeItemName;
+      this.$el.querySelector(qrcodeElementId).innerHTML = ''; // reset qr code
+      new QRCode(this.$el.querySelector(qrcodeElementId), {
         text: url,
         width: 256,
         height: 256,
@@ -123,11 +121,11 @@ export default {
       });
     },
     divToImage(qrcodeImageElementId) {
-      var qrcodeDivElementId = 'qrcodeDiv';
-      document.getElementById(qrcodeDivElementId).style.display = 'block'; // show the div for converting to image
-      html2canvas(document.getElementById(qrcodeDivElementId)).then((canvas) => { // convert div(QR code + text) into image
-        document.getElementById(qrcodeImageElementId).appendChild(canvas);
-        document.getElementById(qrcodeDivElementId).style.display = 'none'; // hide the original div
+      var qrcodeDivElementId = '#qrcodeDiv';
+      this.$el.querySelector(qrcodeDivElementId).style.display = 'block'; // show the div for converting to image
+      html2canvas(this.$el.querySelector(qrcodeDivElementId)).then((canvas) => { // convert div(QR code + text) into image
+        this.$el.querySelector(qrcodeImageElementId).appendChild(canvas);
+        this.$el.querySelector(qrcodeDivElementId).style.display = 'none'; // hide the original div
       });
     }
   }
