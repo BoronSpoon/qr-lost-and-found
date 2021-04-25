@@ -41,19 +41,20 @@
                   color="grey darken-3"
                   label
                   text-color="white"
-                  @click.stop="changeExpandState(i)"
+                  @click.stop="item.expand =! item.expand"
                 >
+                  {{item.expand}}
                   QR
-                  <v-icon v-if="expand[i]">
+                  <v-icon v-if="item.expand">
                     mdi-chevron-up
                   </v-icon>
-                  <v-icon v-if="!expand[i]">
+                  <v-icon v-if="!item.expand">
                     mdi-chevron-down
                   </v-icon>
                 </v-chip>
               </v-col>
               <v-col cols="12">
-                <QR :itemName="item.name" :clicked="expand[i]" :itemId="item.id"/>
+                <QR :itemName="item.name" :clicked="item.expand" :itemId="item.id"/>
               </v-col>
             </v-row>
           </v-list-item-content>
@@ -86,22 +87,17 @@ export default {
     title: 'Item List',
     dataReady: false,
     panels: [],
-    expand: [],
   }),
   components: {
     Header,
     QR
   },
   watch: {
-    'expand[0]' (){
-        console.log(this.expand[0]);
-    },
     currentPage(){
       this.shownItem = {
         start: (this.currentPage-1)*this.itemsPerPage, // start item no for current page
         end: Math.min((this.currentPage)*this.itemsPerPage, this.items.length) // end item no for current page
       };
-      this.expand.fill(false);
     }
   },
   mounted() {
@@ -111,21 +107,17 @@ export default {
       this.shownItem = {
         start: (this.currentPage-1)*this.itemsPerPage, // start item no for current page
         end: Math.min((this.currentPage)*this.itemsPerPage, this.items.length) // end item no for current page
-      };
-      this.expand = new Array(this.itemsPerPage).fill(false);
+      };      
+      // eslint-disable-next-line no-unused-vars
+      Object.keys(this.items).map((key, index) => {
+        this.$set(this.items[key], 'expand', false);
+      });
       this.dataReady = true;
     });
   },
   mixins: [DatabaseOps],
   methods: {
-    s(e){
-      console.log(e)
-    },
-    changeExpandState(i){
-      console.log("click");
-      this.expand[i] = !this.expand[i];
-      console.log(this.expand[i]);
-    }
+    //
   }
 };
 </script>
