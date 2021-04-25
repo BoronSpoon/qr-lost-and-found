@@ -7,56 +7,56 @@
     ></v-progress-circular>
     <v-card class="overflow-hidden" v-if="dataReady">
       <v-list>
-        <v-list-group
+        <v-list-item
           v-for="(item, i) in items.slice(shownItem.start,shownItem.end)"
           :key="i"
         >
-          <v-list-item slot="activator">
             <v-list-item-title>
-            <v-row no-gutters>
-              <v-col align="start">
-                {{item.name}}
-              </v-col>
-              <v-col align="end">
-                <v-chip
-                  class="mx-1 my-0"
-                  :color="item.lost? 'red': 'grey'"
-                  label
-                  text-color="white"
-                  @click.stop="item.lost = !item.lost"
-                  v-text="item.lost? 'lost': 'not lost'"
-                >
-                </v-chip>
-                <v-chip
-                  class="mx-1 my-0"
-                  :color="item.found? 'red': 'grey'"
-                  label
-                  text-color="white"
-                  v-text="item.found? 'found': 'not found'"
-                >
-                </v-chip>
-              </v-col>
-              <v-col align="end">
-                <v-chip
-                  class="mx-1 my-0"
-                  color="grey darken-3"
-                  label
-                  text-color="white"
-                  @click.stop="item.expand=!item.expand"
-                >
-                  QR
-                  <v-icon>
-                    mdi-chevron-down
-                  </v-icon>
-                </v-chip>
-              </v-col>
-            </v-row>
+              <v-row no-gutters>
+                <v-col align="start">
+                  {{item.name}}
+                </v-col>
+                <v-col align="end">
+                  <v-chip
+                    class="mx-1 my-0"
+                    :color="item.lost? 'red': 'grey'"
+                    label
+                    text-color="white"
+                    @click.stop="item.lost = !item.lost"
+                    v-text="item.lost? 'lost': 'not lost'"
+                  >
+                  </v-chip>
+                  <v-chip
+                    class="mx-1 my-0"
+                    :color="item.found? 'red': 'grey'"
+                    label
+                    text-color="white"
+                    v-text="item.found? 'found': 'not found'"
+                  >
+                  </v-chip>
+                </v-col>
+                <v-col align="end">
+                  <v-chip
+                    class="mx-1 my-0"
+                    color="grey darken-3"
+                    label
+                    text-color="white"
+                    @click.stop="item.expand=!item.expand"
+                    @click="s([item.expand, item.id])"
+                  >
+                    QR
+                    <v-icon>
+                      mdi-chevron-down
+                    </v-icon>
+                  </v-chip>
+                </v-col>
+              </v-row>
             </v-list-item-title>
-          </v-list-item>
-          <v-list-item>
-            <QR :itemName="item.value" :clicked="item.expand"/>
-          </v-list-item>
-        </v-list-group> 
+            <v-list-item-content>
+              <QR :itemName="item.id" :clicked="item.expand"/>
+            </v-list-item-content>
+          
+        </v-list-item> 
       </v-list>
       <v-col cols="10">
         <v-pagination

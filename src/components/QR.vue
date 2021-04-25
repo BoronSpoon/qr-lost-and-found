@@ -77,6 +77,9 @@ export default {
         'name': this.itemName
       }
       var itemId = this.pushItems(item);
+      this.updateItems(itemId, {
+        'id': itemId
+      });
       this.setItemIds(itemId);
       var url = 'http://127.0.0.1:5000/?foundItemId='+itemId;
       var qrcodeImageElementId = 'qrcodeImage';
