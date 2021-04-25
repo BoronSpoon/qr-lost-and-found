@@ -1,21 +1,37 @@
 <template>
   <div>
-    <div id="qrcodeImage"></div>
+    <div id="qrcodeImage" class="qrcodeImage"></div>
     <div id="qrcodeDiv" class="container">
       <span class="qrcodeText" style="font-weight: bold">StopLosingStuff(Lost＆Found contact)</span>
       <span class="qrcodeText" style="font-weight: bold">[忘れ物連絡タグ]</span>
       <span class="qrcodeText">Please contact owner using QR code below</span>
       <span class="qrcodeText">拾った方はQRコードで所有者へ連絡をお願い致します</span>
       <span class="qrcodeText" id="qrcodeItemName"></span>
-      <div id="qrcode" style="padding-top:4px"></div>
+      <div id="qrcode" class="qrcode"></div>
     </div>
   </div>
 </template>
 
 <style lang="scss">
+.qrcode {
+  all:initial;
+  padding:4px;
+  margin: 0px;
+  text-align:center;
+  width: 256px;
+  height: 256px;
+}
+.qrcodeImage {
+  all:initial;
+  padding:0px;
+  margin: 0px;
+  text-align:center;
+  color:grey darken-3;
+}
 .qrcodeText {
   all:initial;
-  line-height: 13px;
+  padding:0px;
+  margin: 0px;
   font-size: 10px;
   text-align: center;
   display: block;
@@ -24,13 +40,10 @@
 .container {
   all:initial;
   background-color: #ffffff;
-  border-radius: 2px;
-  border-style: solid;
-  border-color: #000000;
-  width: 270px;
-  text-align: center;
-  margin: 0px;
+  width: 256px !important;
   padding: 2px !important;
+  margin: 0px;
+  text-align: center;
   display: none;
 }
 </style>

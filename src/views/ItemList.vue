@@ -43,18 +43,14 @@
                   text-color="white"
                   @click.stop="item.expand =! item.expand"
                 >
-                  {{item.expand}}
                   QR
-                  <v-icon v-if="item.expand">
-                    mdi-chevron-up
-                  </v-icon>
-                  <v-icon v-if="!item.expand">
+                  <v-icon>
                     mdi-chevron-down
                   </v-icon>
                 </v-chip>
               </v-col>
               <v-col cols="12">
-                <QR :itemName="item.name" :clicked="item.expand" :itemId="item.id"/>
+                <QR :itemName="item.name" :clicked.sync="item.expand" :itemId="item.id"/>
               </v-col>
             </v-row>
           </v-list-item-content>
