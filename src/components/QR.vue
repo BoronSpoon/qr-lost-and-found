@@ -26,7 +26,7 @@
   width: 270px;
   text-align: center;
   margin: 0px;
-  padding: 0px;
+  padding: 2px;
   display: none;
 }
 </style>
