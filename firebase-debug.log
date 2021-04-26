@@ -1,0 +1,25 @@
+[debug] [2021-04-26T11:40:45.835Z] ----------------------------------------------------------------------
+[debug] [2021-04-26T11:40:45.837Z] Command:       /usr/local/bin/firebase /home/ray/.cache/firebase/tools/lib/node_modules/firebase-tools/lib/bin/firebase emulators:start
+[debug] [2021-04-26T11:40:45.838Z] CLI Version:   9.6.1
+[debug] [2021-04-26T11:40:45.838Z] Platform:      linux
+[debug] [2021-04-26T11:40:45.838Z] Node Version:  v12.18.1
+[debug] [2021-04-26T11:40:45.843Z] Time:          Mon Apr 26 2021 20:40:45 GMT+0900 (Japan Standard Time)
+[debug] [2021-04-26T11:40:45.843Z] ----------------------------------------------------------------------
+[debug] [2021-04-26T11:40:45.843Z] 
+[debug] [2021-04-26T11:40:45.858Z] >>> [apiv2][query] GET https://firebase-public.firebaseio.com/cli.json [none]
+[debug] [2021-04-26T11:40:45.909Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2021-04-26T11:40:45.909Z] > authorizing via signed-in user
+[info] i  emulators: Starting emulators: auth, functions, database, hosting {"metadata":{"emulator":{"name":"hub"},"message":"Starting emulators: auth, functions, database, hosting"}}
+[warn] ⚠  emulators: It seems that you are running multiple instances of the emulator suite for project qr-lost-and-found. This may result in unexpected behavior. 
+[debug] [2021-04-26T11:40:45.944Z] [hub] writing locator at /tmp/hub-qr-lost-and-found.json
+[warn] ⚠  functions: The following emulators are not running, calls to these services from the Functions emulator will affect production: firestore, pubsub {"metadata":{"emulator":{"name":"functions"},"message":"The following emulators are not running, calls to these services from the Functions emulator will affect production: \u001b[1mfirestore, pubsub\u001b[22m"}}
+[info] ✔  functions: Using node@12 from host. {"metadata":{"emulator":{"name":"functions"},"message":"Using node@12 from host."}}
+[debug] [2021-04-26T11:40:46.021Z] defaultcredentials: writing to file /home/ray/.config/firebase/systemd_alert_gmail.com_application_default_credentials.json
+[debug] [2021-04-26T11:40:46.040Z] Setting GAC to /home/ray/.config/firebase/systemd_alert_gmail.com_application_default_credentials.json {"metadata":{"emulator":{"name":"functions"},"message":"Setting GAC to /home/ray/.config/firebase/systemd_alert_gmail.com_application_default_credentials.json"}}
+[debug] [2021-04-26T11:40:46.042Z] > refreshing access token with scopes: []
+[debug] [2021-04-26T11:40:46.043Z] >>> HTTP REQUEST POST https://www.googleapis.com/oauth2/v3/token  
+ <request body omitted>
+[debug] [2021-04-26T11:40:46.625Z] <<< HTTP RESPONSE 200 {"expires":"Mon, 01 Jan 1990 00:00:00 GMT","date":"Mon, 26 Apr 2021 11:40:47 GMT","pragma":"no-cache","cache-control":"no-cache, no-store, max-age=0, must-revalidate","content-type":"application/json; charset=utf-8","vary":"X-Origin, Referer, Origin,Accept-Encoding","server":"scaffolding on HTTPServer2","x-xss-protection":"0","x-frame-options":"SAMEORIGIN","x-content-type-options":"nosniff","alt-svc":"h3-29=\":443\"; ma=2592000,h3-T051=\":443\"; ma=2592000,h3-Q050=\":443\"; ma=2592000,h3-Q046=\":443\"; ma=2592000,h3-Q043=\":443\"; ma=2592000,quic=\":443\"; ma=2592000; v=\"46,43\"","accept-ranges":"none","transfer-encoding":"chunked"}
+[debug] [2021-04-26T11:40:46.644Z] >>> [apiv2][query] GET https://firebase.googleapis.com/v1beta1/projects/qr-lost-and-found/adminSdkConfig [none]
+[debug] [2021-04-26T11:40:46.709Z] <<< [apiv2][status] GET https://firebase-public.firebaseio.com/cli.json 200
+[debug] [2021-04-26T11:40:46.710Z] <<< [apiv2][body] GET https://firebase-public.firebaseio.com/cli.json {"cloudBuildErrorAfter":1594252800000,"cloudBuildWarnAfter":1590019200000,"defaultNode10After":1594252800000,"minVersion":"3.0.5","node8DeploysDisabledAfter":1613390400000,"node8RuntimeDisabledAfter":1615809600000,"node8WarnAfter":1600128000000}

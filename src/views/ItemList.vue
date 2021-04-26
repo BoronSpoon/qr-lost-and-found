@@ -41,16 +41,22 @@
                   color="grey darken-3"
                   label
                   text-color="white"
-                  @click.stop="item.expand =! item.expand"
+                  @click.stop="changeExpandState(i)"
                 >
+                  {{item.expand}}
                   QR
                   <v-icon>
                     mdi-chevron-down
                   </v-icon>
                 </v-chip>
               </v-col>
-              <v-col cols="12">
-                <QR :itemName="item.name" :clicked.sync="item.expand" :itemId="item.id"/>
+              <v-col 
+                cols="12" 
+                class="pa-0 text-center"
+              >
+                <div v-show="item.expand">
+                  <QR :itemName="item.name" :clicked="item.expand" :itemId="item.id"/>
+                </div>
               </v-col>
             </v-row>
           </v-list-item-content>
@@ -113,7 +119,16 @@ export default {
   },
   mixins: [DatabaseOps],
   methods: {
-    //
+    changeExpandState(index){ // expand qr for clicked list item, close for others
+      for (var i = 0; i < this.itemsPerPage; i++){
+        var item = this.items[this.shownItem.start+i];
+        if (i == index){ // expand
+          this.$set(item, 'expand', !item.expand);
+        } else { // close
+          this.$set(item, 'expand', false);
+        }
+      }
+    }
   }
 };
 </script>
