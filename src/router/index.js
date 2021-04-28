@@ -37,6 +37,13 @@ const routes = [
       import("@/views/ItemList.vue"),
   },
   {
+    path: "/messageList",
+    name: "MessageList",
+    meta: { requiresAuth: true },
+    component: () =>
+      import("@/views/MessageList.vue"),
+  },
+  {
     path: "/",
     name: "Authentication",
     component: () =>

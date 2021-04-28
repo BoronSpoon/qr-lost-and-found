@@ -44,6 +44,7 @@ export default {
       { text: 'Preferences', icon: 'mdi-account-cog', link: '/userPreferences'},
       { text: 'Item Registeration', icon: 'mdi-tag-plus' , link: '/itemRegisteration'},
       { text: 'Item List', icon: 'mdi-tag-multiple', link: '/itemList'},
+      { text: 'Message List', icon: 'mdi-forum', link: '/messageList'},
     ]
   }),
   watch: {
