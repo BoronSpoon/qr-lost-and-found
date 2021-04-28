@@ -7,21 +7,21 @@
     ></v-progress-circular>
     <v-card class='overflow-hidden' v-if="dataReady">
       <v-list>
-        <v-list-message-group
+        <v-list-item-group
           v-model="selectedMessage"
           color='primary'
         >
-          <v-list-message
+          <v-list-item
             v-for="(message, i) in messages.slice(shownMessage.start,shownMessage.end)"
             :key="i"
           >
-            <v-list-message-content>
+            <v-list-item-content>
               <v-row class='align-start'>
                 <v-col
                   cols='auto'
                   class='mr-auto px-3 py-2'  
                 >
-                  {{message.message}}
+                  {{message.item}}
                 </v-col>
                 <v-col
                   cols='auto'
@@ -39,17 +39,12 @@
                   cols='12'
                   class='pa-1 text-center'
                 >
-                  <v-container
-                    class='fluid fill-height'
-                    v-show="message.expand"
-                  >
-                    {{message.text}}
-                  </v-container>
+                  {{message.text}}
                 </v-col>
               </v-row>
-            </v-list-message-content>
-          </v-list-message> 
-        </v-list-message-group>
+            </v-list-item-content>
+          </v-list-item> 
+        </v-list-item-group>
       </v-list>
       <v-row no-gutters>
         <v-col cols='12'>
@@ -65,7 +60,6 @@
 
 <script>
 import Header from '@/components/Header'
-import QR from '@/components/QR'
 import DatabaseOps from '@/mixins/DatabaseOps'
 
 export default {
@@ -84,7 +78,6 @@ export default {
   }),
   components: {
     Header,
-    QR
   },
   watch: {
     selectedMessage () { 

@@ -77,8 +77,15 @@ export default {
             }); // return promise
         },
         async getAllMessages() {
-            return firebase.database().ref('messages/'+this.$userId).get().then((snapshot) => {
-                return snapshot.val();
+            return firebase.database().ref('messages/'+this.$userId).orderByKey().once('value').then((snapshot) => {
+                var data = [];
+                snapshot.forEach((childSnapshot) => {
+                    var key = childSnapshot.key; // timestamp
+                    var childData = childSnapshot.val(); // data for item
+                    childData.itemId = key;
+                    data.push(childData); 
+                });
+                return data;
             }); // return promise
         },
         async getMessagesByItem(itemid, messageId) {
