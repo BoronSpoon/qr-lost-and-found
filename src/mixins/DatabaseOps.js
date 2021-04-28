@@ -71,8 +71,18 @@ export default {
         },
 
         // Messages
-        async getMessages(messageId) {
+        async getMessage(messageId) {
             return firebase.database().ref('messages/'+this.$userId+'/'+messageId).get().then((snapshot) => {
+                return snapshot.val();
+            }); // return promise
+        },
+        async getAllMessages() {
+            return firebase.database().ref('messages/'+this.$userId).get().then((snapshot) => {
+                return snapshot.val();
+            }); // return promise
+        },
+        async getMessagesByItem(itemid, messageId) {
+            return firebase.database().ref('messages/'+this.$userId).orderByChild('item').equalTo(itemId).get().then((snapshot) => {
                 return snapshot.val();
             }); // return promise
         },
