@@ -8,6 +8,13 @@ const routes = [
     path: "*",
     redirect: "/"
   },
+  { // item found page
+    path: "/lostAndFound",
+    name: "LostAndFound",
+    meta: { requiresAuth: false },
+    component: () =>
+      import("@/views/LostAndFound.vue"),
+  },
   {
     path: "/mainMenu",
     name: "MainMenu",
