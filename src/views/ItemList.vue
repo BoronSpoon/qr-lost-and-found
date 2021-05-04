@@ -33,7 +33,7 @@
                     :color="item.lost? colors[5]: colors[1]"
                     label
                     text-color='white'
-                    @click.stop="item.lost = !item.lost"
+                    @click.stop="changeLostState(i)"
                     v-text="item.lost? 'lost': 'not lost'"
                   >
                   </v-chip>
@@ -159,6 +159,11 @@ export default {
           this.$set(item, 'expand', false);
         }
       }
+    },
+    changeLostState(index){
+      var item = this.items[this.shownItem.start+index];
+      this.$set(item, 'lost', !item.lost);
+      this.updateItems(item.id, item);
     }
   }
 };
