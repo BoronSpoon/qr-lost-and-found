@@ -49,10 +49,15 @@ export default {
       { text: 'What is the current location of this item?', value: 'did you send it to the police station or is it still in your hands?', type: 'textField'},
       { text: 'Message to owner', value: 'ex) I have sent the item to NYC police station', type: 'textField'},
     ],
-    itemId = '',
+    itemId: '',
+    userId: '',
   }),
   components: {
     //
+  },
+  mounted(){
+    this.itemId = this.$route.query.itemid;
+    this.userId = this.$route.query.userid;
   },
   methods: {
     formSubmit() {
@@ -65,8 +70,8 @@ export default {
         'sender': this.preferences[0].value,
         'text': this.preferences[3].value
       };
-      this.updateUserPreferences(userPreferences);
-      this.pushMessages(message);
+      this.updatePublicItemData(this.userId, this.itemId, userPreferences);
+      this.pushMessage(message);
     }
   },
   mixins: [DatabaseOps]

@@ -95,11 +95,11 @@ export default {
           'lost': false,
           'name': this.itemName
         }
-        this.itemId = this.pushItems(item);
-        this.updateItems(this.itemId, {
+        this.itemId = this.pushItem(item);
+        this.updateItem(this.itemId, {
           'id': this.itemId
         });
-        this.setItemIds(this.itemId);
+        this.setItemId(this.itemId);
       }
       var url = 'http://127.0.0.1:5000/?foundItemId='+this.itemId;
       var qrcodeImageElementId = '#qrcodeImage';

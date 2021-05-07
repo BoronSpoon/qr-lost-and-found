@@ -163,7 +163,7 @@ export default {
     changeLostState(index){
       var item = this.items[this.shownItem.start+index];
       this.$set(item, 'lost', !item.lost);
-      this.updateItems(item.id, item);
+      this.updateItem(item.id, item);
     }
   }
 };

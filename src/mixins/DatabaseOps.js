@@ -32,17 +32,17 @@ export default {
         },
 
         // ItemIds
-        async getItemIds(itemId) {
+        async getItemId(itemId) {
             return firebase.database().ref('itemIds/'+itemId).get().then((snapshot) => {
                 return snapshot.val();
             }); // returns promise
         },
-        setItemIds(itemId) {
+        setItemId(itemId) {
             firebase.database().ref('itemIds/'+itemId).set(this.$userId);
         },
 
         // Items
-        async getItems(itemId) {
+        async getItem(itemId) {
             return firebase.database().ref('items/'+this.$userId+'/'+itemId).get().then((snapshot) => {
                 return snapshot.val();
             }); // returns promise
@@ -59,13 +59,13 @@ export default {
                 return data;
             }); 
         },
-        setItems(itemId, data) {
+        setItem(itemId, data) {
             firebase.database().ref('items/'+this.$userId+'/'+itemId).set(data);
         },
-        updateItems(itemId, data) {
+        updateItem(itemId, data) {
             firebase.database().ref('items/'+this.$userId+'/'+itemId).update(data);
         },
-        pushItems(data) {
+        pushItem(data) {
             var itemId = firebase.database().ref('items/'+this.$userId).push(data).key;
             return itemId;
         },
@@ -93,12 +93,19 @@ export default {
                 return snapshot.val();
             }); // return promise
         },
-        setMessages(messageId, data) {
+        setMessage(messageId, data) {
             firebase.database().ref('messages/'+this.$userId+'/'+messageId).set(data);
         },
-        pushMessages(data) {
+        pushMessage(data) {
             var messageId = firebase.database().ref('messages/'+this.$userId).push(data).key;
             return messageId;
-        }
+        },
+        // accessed by visitor
+        updatePublicItemData(userId, itemId, data) {
+            firebase.database().ref('items/'+userId+'/'+itemId).update(data);
+        },
+        pushPublicMessage(userId, itemId, data) {
+            firebase.database().ref('items/'+userId+'/'+itemId).update(data);
+        },
     }
 }
