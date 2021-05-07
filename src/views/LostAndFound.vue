@@ -44,13 +44,13 @@ export default {
   name: "UserPreferences",
   data: () => ({
     preferences: [
-      { text: 'Your User Name', value: this.userId, type: 'textField'},
       { text: 'Where was the item found?', value: 'name of building, where in the building...', type: 'textField'},
       { text: 'What is the current location of this item?', value: 'did you send it to the police station or is it still in your hands?', type: 'textField'},
       { text: 'Message to owner', value: 'ex) I have sent the item to NYC police station', type: 'textField'},
     ],
     itemId: '',
     userId: '',
+    finderId: '',
   }),
   components: {
     //
@@ -58,17 +58,26 @@ export default {
   mounted(){
     this.itemId = this.$route.query.itemid;
     this.userId = this.$route.query.userid;
+    this.finderId = this.$route.query.finderid;
+    if (typeof this.finderId === 'undefined'){ // if new finder
+      var data = {
+        'itemId': this.itemId,
+        'userId': this.userId,
+      };
+      this.finderId = this.pushPublicFinder(data);
+    }
+    // TBD: finderId maybe invalid
   },
   methods: {
     formSubmit() {
       var userPreferences = {
-        'foundLocation': this.preferences[1].value,
-        'currentLocation': this.preferences[2].value,
+        'foundLocation': this.preferences[0].value,
+        'currentLocation': this.preferences[1].value,
       };
       var message = {
         'item': this.itemId,
-        'sender': this.preferences[0].value,
-        'text': this.preferences[3].value
+        'sender': this.finderId,
+        'text': this.preferences[2].value
       };
       this.updatePublicItemData(this.userId, this.itemId, userPreferences);
       this.pushPublicMessage(this.userId, message);

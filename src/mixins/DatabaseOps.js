@@ -108,5 +108,9 @@ export default {
             var messageId = firebase.database().ref('messages/'+userId).push(data).key;
             return messageId;
         },
+        pushPublicFinder(data) {
+            var finderId = firebase.database().ref('finders/').push(data).key;
+            return finderId;
+        },
     }
 }
