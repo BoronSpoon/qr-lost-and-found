@@ -104,8 +104,9 @@ export default {
         updatePublicItemData(userId, itemId, data) {
             firebase.database().ref('items/'+userId+'/'+itemId).update(data);
         },
-        pushPublicMessage(userId, itemId, data) {
-            firebase.database().ref('items/'+userId+'/'+itemId).update(data);
+        pushPublicMessage(userId, data) {
+            var messageId = firebase.database().ref('messages/'+userId).push(data).key;
+            return messageId;
         },
     }
 }

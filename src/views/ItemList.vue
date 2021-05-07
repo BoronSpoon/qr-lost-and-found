@@ -118,7 +118,7 @@ export default {
     selectedItem () { 
       // when item different from expanded one is clicked
       if ((typeof this.selectedItem !== 'undefined') && (this.selectedItem !== -1)){ // if none is clicked, selectedItem is undefined or -1
-        if (this.items[this.shownItem.start+this.selectedItem].expand ==== false){
+        if (this.items[this.shownItem.start+this.selectedItem].expand === false){
           this.changeExpandState(-1); // set expand to false for all list
         };
       } 

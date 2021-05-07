@@ -10,17 +10,17 @@
           :key="i"
         >
           <v-text-field
-            v-if="preference.type ==== 'textField'"
+            v-if="preference.type === 'textField'"
             v-model="preference.value"
             :label="preference.text"
           ></v-text-field>
           <v-checkbox
-            v-if="preference.type ==== 'checkbox'"
+            v-if="preference.type === 'checkbox'"
             v-model="preference.value"
             :label="preference.text"
           ></v-checkbox>
           <v-select
-            v-if="preference.type ==== 'select'"
+            v-if="preference.type === 'select'"
             v-model="preference.value"
             :items="preference.values"
             :label="preference.text"
@@ -71,7 +71,7 @@ export default {
         'text': this.preferences[3].value
       };
       this.updatePublicItemData(this.userId, this.itemId, userPreferences);
-      this.pushMessage(message);
+      this.pushPublicMessage(this.userId, message);
     }
   },
   mixins: [DatabaseOps]
