@@ -76,7 +76,7 @@ export default {
   }),
   watch: {
     clicked() {
-      if (this.clicked == true){
+      if (this.clicked === true){
         this.$emit('update:clicked', false);
         if (this.itemName != ''){
           this.drawQR();
@@ -87,7 +87,7 @@ export default {
   mixins: [DatabaseOps],
   methods: {
     drawQR() {
-      if (this.itemId == ''){
+      if (this.itemId === ''){
         var item = {
           'currentLocation': '',
           'foundLocation': '',

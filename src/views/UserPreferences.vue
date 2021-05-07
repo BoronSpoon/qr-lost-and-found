@@ -11,13 +11,13 @@
           :key="i"
         >
           <v-checkbox
-            v-if="preference.type == 'checkbox'"
+            v-if="preference.type === 'checkbox'"
             v-model="preference.value"
             :label="preference.text"
             @change="formSubmit"
           ></v-checkbox>
           <v-select
-            v-if="preference.type == 'select'"
+            v-if="preference.type === 'select'"
             v-model="preference.value"
             :items="preference.values"
             :label="preference.text"
