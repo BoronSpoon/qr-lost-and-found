@@ -59,12 +59,28 @@ export default {
     this.itemId = this.$route.query.itemid;
     this.userId = this.$route.query.userid;
     this.finderId = this.$route.query.finderid;
-    if (typeof this.finderId === 'undefined'){ // if new finder
+    if (typeof this.userId === 'undefined') alert('userId is empty');
+    if (typeof this.itemId === 'undefined') alert('itemId is empty');
+    this.validateItemIdUserId(this.itemId, this.userId).then((exists) => {
+      if (exists === false) alert('userId, itemId is invalid');
+    });
+    if (typeof this.finderId === 'undefined'){ // if finderId is empty
       var data = {
         'itemId': this.itemId,
         'userId': this.userId,
       };
       this.finderId = this.pushPublicFinder(data);
+    } else { // if finderId is not empty
+      var validFinderId = this.validateFinderId(this.finderId, this.itemId, this.userId);
+      // if finderId is invalid
+      console.log('finderId is invalid. Creating new finder Id');
+      if (validFinderId === false){
+        var data = {
+          'itemId': this.itemId,
+          'userId': this.userId,
+        };
+        this.finderId = this.pushPublicFinder(data);
+      }
     }
     // TBD: finderId maybe invalid
   },

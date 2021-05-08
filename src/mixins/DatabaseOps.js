@@ -112,5 +112,17 @@ export default {
             var finderId = firebase.database().ref('finders/').push(data).key;
             return finderId;
         },
+        // exists
+        async validateItemIdUserId(itemId, userId) {
+            return firebase.database().ref('itemIds/'+itemId).get().then((snapshot) => {
+                return userId == snapshot.val();
+            }); // returns promise
+        },
+        async validateFinderId(finderId, itemId, userId) {
+            return firebase.database().ref('finders/'+finderId).get().then((snapshot) => {
+                var value = snapshot.val();
+                return value.userId == userId && value.itemId == itemId;
+            });
+        },
     }
 }
