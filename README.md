@@ -1,15 +1,74 @@
 # QR_lost_and_found
-A QR code based lost and found service.
-```sequence
-Note right of Browser: id is "sd78fy"
-Browser->Firebase: https://test.com/?id=sd78fy
-Note right of Firebase: accept user input message 
-Note right of Firebase: get email of client "sd78fy" 
-Firebase->Google Apps Script: Invoke API
-Note right of Google Apps Script: MailApp.sendEmail()
-Google Apps Script->Owner of item: send email
-Google Apps Script->Browser: success/fail
+A QR code based lost and found service
+## Finder to Owner
+```plantuml
+participant Finder as finder
+participant Browser as browser
+participant "Firebase RTDB" as firebase
+participant "Google Apps Script" as gas
+participant Owner as owner
+
+note over finder, browser: "https://test.com/?userid=uid1\n&itemid=iid2&finderid=fid1"
+finder->browser:userId="uid1"\nitemId="iid2"\nfinderId="fid1"
+alt 
+browser->firebase:VALID? (userId, itemId)
+else FALSE
+finder<-browser:ALERT(error); EXIT
+end
+alt
+browser->firebase:VALID? (finderId)
+else TRUE
+note over browser, firebase:finder has visited before
+browser<->firebase:GET (messages)
+else FALSE
+note over browser, firebase:new finder
+browser->firebase:NEW (finder)
+browser<-firebase:finderId
+end
+note over finder, browser:foundLocation\ncurrentLocation\ntext
+finder->browser:MESSAGE()
+note over browser, firebase:foundLocation\ncurrentLocation\ntext\nfinderId
+browser->firebase:PUSH(message)
+firebase->gas: Invoke API
+note right: MailApp.sendEmail()
+gas->owner: send email
+firebase<-gas: success/fail
+browser<-firebase: success/fail
 ```
+## Owner
+```plantuml
+participant Owner as owner
+participant Browser as browser
+participant "Firebase RTDB" as firebase
+
+note over finder, browser: "https://test.com/?userid=uid1\n&itemid=iid2&finderid=fid1"
+finder->browser:userId="uid1"\nitemId="iid2"\nfinderId="fid1"
+alt 
+browser->firebase:VALID? (userId, itemId)
+else FALSE
+finder<-browser:ALERT(error); EXIT
+end
+alt
+browser->firebase:VALID? (finderId)
+else TRUE
+note over browser, firebase:finder has visited before
+browser<->firebase:GET (messages)
+else FALSE
+note over browser, firebase:new finder
+browser->firebase:NEW (finder)
+browser<-firebase:finderId
+end
+note over finder, browser:foundLocation\ncurrentLocation\ntext
+finder->browser:MESSAGE()
+note over browser, firebase:foundLocation\ncurrentLocation\ntext\nfinderId
+browser->firebase:PUSH(message)
+firebase->gas: Invoke API
+note right: MailApp.sendEmail()
+gas->owner: send email
+firebase<-gas: success/fail
+browser<-firebase: success/fail
+```
+
 ## Services we will use
 ### Google Firebase
 https://firebase.google.com/
@@ -56,9 +115,10 @@ https://github.com/dwyl/learn-to-send-email-via-google-script-html-no-server
 ## form submit
 The input data should be stored in an object.
 [reference](https://github.com/dwyl/learn-to-send-email-via-google-script-html-no-server#7-create-your-basic-html-form)
-#### 1. registeration
+#### 1. user registeration
 - authentication is done by Firebase's internal function
 - form inputs
+    - user name
     - email address (for notification)
 #### 2. item registeration
 - form inputs
@@ -120,12 +180,59 @@ The input data should be stored in an object.
 - messages:
     - userId1:
         - messageId1: 
-            - item: itemId1
+            - itemId: itemId1
             - sender: finder
             - text: Hey I found this watch
-            - timestamp: 92839321
         - messageId2: 
             - item: itemId1
             - sender: owner
             - text: Please give it to the police
-            - timestamp: 92839928
+```json
+{
+users:{
+    userId1:{
+        name: arch,
+        email: arch_gmail.com,
+        preferences: {
+            notifyAtLinkOpen: true,
+            notifyNotLostItem: true,
+            whereToNotify: email,
+        },
+    },
+},
+items: {
+    userId1:{
+        itemId1:{
+            name: watch,
+            lost: true,
+            foundLocation: bus station,
+            currentLocation: police station,
+        },
+    },
+},
+messages:{
+    userId1:{
+        messageId1: {
+            item: itemId1,
+            sender: finder,
+            text: Hey I found this watch
+        },
+        messageId2: {
+            item: itemId1,
+            sender: owner,
+            text: Please give it to the police
+        },
+    },
+},
+}
+```
+
+### installation of firebase emulator
+```bash
+sudo apt install default-jre // install java
+cd {project_base} // go to project base
+curl -sL https://firebase.tools | bash // install firebase
+firebase login
+firebase init emulators
+firebase emulators:start
+```
