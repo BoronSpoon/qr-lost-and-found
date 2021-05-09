@@ -4,69 +4,56 @@ A QR code based lost and found service
 ```plantuml
 participant Finder as finder
 participant Browser as browser
-participant "Firebase RTDB" as firebase
+participant "Firebase RTDB" as db
 participant "Google Apps Script" as gas
 participant Owner as owner
 
 note over finder, browser: "https://test.com/?userid=uid1\n&itemid=iid2&finderid=fid1"
 finder->browser:userId="uid1"\nitemId="iid2"\nfinderId="fid1"
 alt 
-browser->firebase:VALID? (userId, itemId)
+browser->db:VALID? (userId, itemId)
 else FALSE
 finder<-browser:ALERT(error); EXIT
 end
 alt
-browser->firebase:VALID? (finderId)
+browser->db:VALID? (finderId)
 else TRUE
-note over browser, firebase:finder has visited before
-browser<->firebase:GET (messages)
+note over browser, db:finder has visited before
+browser<->db:GET (messages)
 else FALSE
-note over browser, firebase:new finder
-browser->firebase:NEW (finder)
-browser<-firebase:finderId
+note over browser, db:new finder
+browser->db:NEW (finder)
+browser<-db:finderId
 end
-note over finder, browser:foundLocation\ncurrentLocation\ntext
+note right of finder:foundLocation\ncurrentLocation\ntext
 finder->browser:MESSAGE()
-note over browser, firebase:foundLocation\ncurrentLocation\ntext\nfinderId
-browser->firebase:PUSH(message)
-firebase->gas: Invoke API
-note right: MailApp.sendEmail()
+note right of browser:foundLocation\ncurrentLocation\ntext\nfinderId
+browser->db:PUSH(message)
+db->gas: Invoke API
+note right of gas: MailApp.sendEmail()
 gas->owner: send email
-firebase<-gas: success/fail
-browser<-firebase: success/fail
+db<-gas: success/fail
+browser<-db: success/fail
 ```
 ## Owner
 ```plantuml
 participant Owner as owner
 participant Browser as browser
-participant "Firebase RTDB" as firebase
+participant "Firebase Auth" as auth
+participant "Firebase RTDB" as db
 
-note over finder, browser: "https://test.com/?userid=uid1\n&itemid=iid2&finderid=fid1"
-finder->browser:userId="uid1"\nitemId="iid2"\nfinderId="fid1"
-alt 
-browser->firebase:VALID? (userId, itemId)
-else FALSE
-finder<-browser:ALERT(error); EXIT
-end
+owner->browser:access
 alt
-browser->firebase:VALID? (finderId)
+browser->auth:NEW? (user)
 else TRUE
-note over browser, firebase:finder has visited before
-browser<->firebase:GET (messages)
+note over browser,auth: create user
+browser->auth:PUSH (user)
+note right of browser: "notifyAtLinkOpen:false,\nnotifyNotLostItem:true,\nwhereToNotify:email"
+browser->db:initUserPreferences() 
 else FALSE
-note over browser, firebase:new finder
-browser->firebase:NEW (finder)
-browser<-firebase:finderId
+browser->auth: LOGIN
 end
-note over finder, browser:foundLocation\ncurrentLocation\ntext
-finder->browser:MESSAGE()
-note over browser, firebase:foundLocation\ncurrentLocation\ntext\nfinderId
-browser->firebase:PUSH(message)
-firebase->gas: Invoke API
-note right: MailApp.sendEmail()
-gas->owner: send email
-firebase<-gas: success/fail
-browser<-firebase: success/fail
+browser<-db: GET (data)
 ```
 
 ## Services we will use
