@@ -19,21 +19,15 @@
               <v-row class='align-start'>
                 <v-col
                   cols='auto'
-                  class='mr-auto px-3 py-2'  
+                  class='mr-auto px-3 py-2 caption'
                 >
                   {{message.item}}
                 </v-col>
                 <v-col
                   cols='auto'
-                  class='mr-auto px-3 py-2'  
+                  class='mr-auto px-3 py-2 caption'
                 >
                   {{message.sender}}
-                </v-col>
-                <v-col
-                  cols='auto'
-                  class='mr-auto px-3 py-2'  
-                >
-                  {{message.timestamp}}
                 </v-col>
                 <v-col 
                   cols='12'
